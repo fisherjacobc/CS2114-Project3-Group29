@@ -16,39 +16,34 @@ public class NodeTest {
     private Node<String> node;
 
     /**
-     * Sets up a fresh Node instance before each test executes.
+     * Sets up a fresh Node instance before each test executes
      */
     @BeforeEach
     public void setUp() {
         node = new Node<>("A");
     }
 
-    // ~ Constructor Tests .....................................................
-
     /**
-     * Tests that the single-argument constructor has no next node.
+     * Tests that the single-argument constructor has no next node
      */
     @Test
-    public void testConstructor_DataOnly() {
+    public void testConstructorWithoutNext() {
         assertEquals("A", node.getData());
         assertNull(node.getNext());
     }
 
     /**
-     * Tests that the two-argument constructor links to the given node.
+     * Tests that the two-argument constructor sets the next node
      */
     @Test
-    public void testConstructor_WithNext() {
+    public void testConstructorWithNext() {
         Node<String> first = new Node<>("B", node);
 
         assertEquals("B", first.getData());
         assertSame(node, first.getNext());
     }
-
-    // ~ Linking Tests .........................................................
-
     /**
-     * Tests setNext with a node and with null.
+     * Tests setNext with a node and with null
      */
     @Test
     public void testSetNext() {
