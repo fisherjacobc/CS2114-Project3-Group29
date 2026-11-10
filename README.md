@@ -79,17 +79,17 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 ### Attribution
 | File | Attribution |
 | ---- | ----------- |
-| rideshare.Main | Jacob (Wrote/Reviewed) 
-| rideshare.RideshareController | Jacob (Wrote/Reviewed) 
-| rideshare.RideshareModel | Aishwarya (Wrote/Reviewed) 
-| rideshare.RideshareView | Jacob (Wrote/Reviewed) 
-| util.Car | Aishwarya (Wrote/Reviewed) 
-| util.CarTest | Jacob (Wrote/Tested) 
-| util.Node | Jacob (Wrote/Reviewed) 
-| util.NodeTest | Jacob (Wrote/Reviewed) 
-| util.Passenger | Aishwarya (Wrote/Reviewed) 
-| util.PassengerTest | Jacob (Wrote/Tested) 
-| util.Queue | Jacob (Wrote/Reviewed) 
-| util.QueueTest | Jacob (Wrote/Reviewed) 
+| rideshare.Main | Jacob (Wrote/Reviewed) |
+| rideshare.RideshareController | Jacob (Wrote/Reviewed) |
+| rideshare.RideshareModel | Aishwarya/GenAI (Wrote), Aishwarya (Reviewed) |
+| rideshare.RideshareView | Jacob (Wrote/Reviewed) |
+| util.Car | Aishwarya (Wrote/Reviewed) |
+| util.CarTest | Jacob (Wrote/Tested) |
+| util.Node | Jacob (Wrote/Reviewed) |
+| util.NodeTest | Jacob (Wrote/Reviewed) |
+| util.Passenger | Aishwarya (Wrote/Reviewed) |
+| util.PassengerTest | Jacob (Wrote/Tested) |
+| util.Queue | Jacob (Wrote/Reviewed) |
+| util.QueueTest | Jacob (Wrote/Reviewed) |
 ### GenAI
-GenAI was not used
+GenAI was used in part for the initial programming of the `RideshareModel` class. The output was modified and thoroughly reviewed by Aishwarya.
