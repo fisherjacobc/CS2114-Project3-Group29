@@ -1,3 +1,5 @@
+package util;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  */
 public class Car {
     private int carId;
-    private Queue passengerQueue;
+    private Queue<Passenger> passengerQueue;
     private int capacity;
 
     /**
@@ -27,7 +29,7 @@ public class Car {
 
         this.carId = carId;
         this.capacity = capacity;
-        passengerQueue = new Queue();
+        passengerQueue = new Queue<>();
     }
 
     /**

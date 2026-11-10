@@ -1,3 +1,5 @@
+package util;
+
 /**
  * Stores one person's name and destination
  * 
