@@ -72,5 +72,5 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 
 ### New tests needed
 - **`RideshareModelTest`** for the spec's test plan plus the changes above *(Owner: Aishwarya)*
-- **`QueueTest`** for `size()` and independent queues *(Owner: Jacob)*
 - **`CarTest`** for clock-driven drop-offs *(Owner: Aishwarya)*
+- Look into tests for the controller and/or view classes *(Owner: Jacob and Aishwarya)*
