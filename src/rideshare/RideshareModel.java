@@ -1,5 +1,8 @@
+package rideshare;
 import java.util.ArrayList;
 import java.util.List;
+
+import util.*;
 
 /**
  * Manages waiting passengers, cars, and ride assignments.
@@ -8,7 +11,7 @@ import java.util.List;
  * @version 11 Nov 2026
  */
 public class RideshareModel {
-    private Queue waitingQueue;
+    private Queue<Passenger> waitingQueue;
     private List<Car> cars;
     private long elapsedMinutes;
 
@@ -16,7 +19,7 @@ public class RideshareModel {
      * Creates a model with no waiting passengers and no cars.
      */
     public RideshareModel() {
-        waitingQueue = new Queue();
+        waitingQueue = new Queue<>();
         cars = new ArrayList<>();
         elapsedMinutes = 0;
     }
