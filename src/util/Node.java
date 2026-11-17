@@ -6,7 +6,7 @@ package util;
  * Class used by a {@link Queue} for the rideshare program
  * 
  * @author fisherjc
- * @version 11 Nov 2026
+ * @version 10 Nov 2026
  * 
  * @param <T> The generic datatype argument to be stored in the Node
  */

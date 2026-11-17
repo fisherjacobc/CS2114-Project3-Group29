@@ -4,7 +4,7 @@ package util;
  * Stores one person's name and destination
  * 
  * @author Aishwarya Shah aishwaryashah28
- * @version 11 Nov 2026
+ * @version 10 Nov 2026
  */
 
 public class Passenger {

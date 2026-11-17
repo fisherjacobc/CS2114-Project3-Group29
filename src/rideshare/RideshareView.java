@@ -12,7 +12,7 @@ import util.Passenger;
  * input from the console.
  *
  * @author fisherjc
- * @version 11 Nov 2026
+ * @version 10 Nov 2026
  */
 public class RideshareView {
     private Scanner scanner;

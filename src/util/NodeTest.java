@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
  * nodes together.
  * 
  * @author fisherjc
- * @version 11 Nov 2026
+ * @version 10 Nov 2026
  */
 public class NodeTest {
 

@@ -8,7 +8,7 @@ import util.Passenger;
  * Controller Portion of the MVC for the Rideshare Program
  *
  * @author fisherjc
- * @version 11 Nov 2026
+ * @version 10 Nov 2026
  */
 public class RideshareController {
     private RideshareModel model;

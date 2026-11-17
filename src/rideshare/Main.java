@@ -7,7 +7,7 @@ package rideshare;
  * controller, then starts the program.
  *
  * @author fisherjc
- * @version 11 Nov 2026
+ * @version 10 Nov 2026
  */
 public class Main {
 
