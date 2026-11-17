@@ -45,7 +45,7 @@ public class RideshareController {
     public void start() {
         while (true) {
             view.displayMenu();
-            int choice = view.readIntRaw();
+            int choice = view.readIntRaw("Input Choice");
 
             if (choice == 0) {
                 view.displayMessage("Program ended.");

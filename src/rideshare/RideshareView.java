@@ -93,8 +93,16 @@ public class RideshareView {
         }
     }
 
-    public int readIntRaw() {
-        return scanner.nextInt();
+    public int readIntRaw(String prompt) {
+        String line = scanner.nextLine().trim();
+            
+        try {
+            return Integer.parseInt(line);
+        }
+        catch (NumberFormatException e) {
+            displayError("Please enter a whole number.");
+            return readInt(prompt);
+        }
     }
 
 
@@ -131,6 +139,8 @@ public class RideshareView {
         System.out.println("│ " + message + " │");
         System.out.println("│" + " ".repeat(width) + "│");
         System.out.println("└" + "─".repeat(width) + "┘");
+
+        Main.pause(scanner);
     }
 
 
