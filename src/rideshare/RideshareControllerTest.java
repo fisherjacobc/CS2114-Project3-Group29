@@ -3,7 +3,9 @@ package rideshare;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -334,18 +336,36 @@ public class RideshareControllerTest {
     }
 
     /**
-     * Checks the current inactive time-simulation behavior.
+     * Checks that time simulation advances the clock and shows the result.
      */
     @Test
-    public void testTimeSimulationPlaceholder() {
+    public void testTimeSimulation() {
         model.updateTravelTime(5);
 
         controller.handleTimeSimulation(10);
 
-        assertEquals(
-            "Time Simulation not completed yet.",
-            view.messages.get(0));
+        assertEquals(15L, model.getElapsedMinutes());
+        assertEquals(1, view.timeDisplays);
+        assertEquals(10, view.shownMinutesAdvanced);
+        assertEquals(15L, view.shownTotalMinutes);
+        assertTrue(view.shownDropOffs.isEmpty());
+        assertTrue(view.errors.isEmpty());
+    }
+
+    /**
+     * Checks that negative minutes are rejected without changing the clock.
+     */
+    @Test
+    public void testTimeSimulationNegative() {
+        model.updateTravelTime(5);
+
+        controller.handleTimeSimulation(-1);
+
         assertEquals(5L, model.getElapsedMinutes());
+        assertEquals(0, view.timeDisplays);
+        assertEquals(
+            "Elapsed minutes cannot be negative.",
+            view.errors.get(0));
     }
 
     /**
@@ -405,6 +425,8 @@ public class RideshareControllerTest {
         controller.handleMenuChoice(5);
         controller.handleMenuChoice(6);
         controller.handleMenuChoice(7);
+
+        view.addInput("10");
         controller.handleMenuChoice(8);
 
         assertEquals(1, view.passengerDisplays);
@@ -412,10 +434,10 @@ public class RideshareControllerTest {
         assertEquals(
             "Roadmap not implemented yet.",
             view.messages.get(0));
-        assertEquals(
-            "Time Simulation not completed yet.",
-            view.messages.get(1));
-        assertEquals(0, view.inputReads);
+        assertEquals(1, view.messages.size());
+        assertEquals(1, view.timeDisplays);
+        assertEquals(10L, model.getElapsedMinutes());
+        assertEquals(1, view.inputReads);
     }
 
     /**
@@ -514,6 +536,11 @@ public class RideshareControllerTest {
         private int carDisplays;
         private int inputReads;
 
+        private int timeDisplays;
+        private int shownMinutesAdvanced;
+        private long shownTotalMinutes;
+        private Map<Integer, List<Passenger>> shownDropOffs;
+
         /**
          * Supplies input lines for the controller to read.
          *
@@ -569,6 +596,17 @@ public class RideshareControllerTest {
         public void displayCars(List<Car> cars) {
             carDisplays++;
             shownCars = new ArrayList<>(cars);
+        }
+
+        @Override
+        public void displayTimeSimulation(
+            int minutesAdvanced,
+            long totalMinutes,
+            Map<Integer, List<Passenger>> dropOffs) {
+            timeDisplays++;
+            shownMinutesAdvanced = minutesAdvanced;
+            shownTotalMinutes = totalMinutes;
+            shownDropOffs = new LinkedHashMap<>(dropOffs);
         }
     }
 }
