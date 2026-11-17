@@ -353,6 +353,28 @@ public class RideshareControllerTest {
     }
 
     /**
+     * Checks that zero minutes is accepted and shows the clock without
+     * any drop-offs.
+     */
+    @Test
+    public void testTimeSimulationZero() {
+        model.initializeCars(1, 2);
+        model.addPassenger("Maya", "Library");
+        model.loadPassengerInCar();
+        model.updateTravelTime(5);
+
+        controller.handleTimeSimulation(0);
+
+        assertEquals(5L, model.getElapsedMinutes());
+        assertEquals(1, view.timeDisplays);
+        assertEquals(0, view.shownMinutesAdvanced);
+        assertEquals(5L, view.shownTotalMinutes);
+        assertTrue(view.shownDropOffs.isEmpty());
+        assertTrue(view.errors.isEmpty());
+        assertEquals(1, model.getCarById(1).getPassengers().size());
+    }
+
+    /**
      * Checks that negative minutes are rejected without changing the clock.
      */
     @Test
