@@ -45,7 +45,7 @@ public class RideshareController {
     public void start() {
         while (true) {
             view.displayMenu();
-            int choice = view.readInt("Choice: ");
+            int choice = view.readIntRaw();
 
             if (choice == 0) {
                 view.displayMessage("Program ended.");
@@ -189,20 +189,20 @@ public class RideshareController {
         switch (choice) {
             case 1:
                 handleInitializeCars(
-                    view.readInt("Number of cars: "),
-                    view.readInt("Capacity: "));
+                    view.readInt("Input Number of cars"),
+                    view.readInt("Input Capacity for every car"));
                 break;
             case 2:
                 handleAddPassenger(
-                    view.readString("Name: "),
-                    view.readString("Destination: "));
+                    view.readString("Input Passenger Name"),
+                    view.readString("Input Destination"));
                 break;
             case 3:
                 handlePassengerAssignment();
                 break;
             case 4:
                 if (checkCarsExist()) {
-                    handleDropOffPassenger(view.readInt("Car ID: "));
+                    handleDropOffPassenger(view.readInt("Input Car ID"));
                 }
                 break;
             case 5:
@@ -215,7 +215,7 @@ public class RideshareController {
                 handleRoadmapDisplay();
                 break;
             case 8:
-                handleTimeSimulation(view.readInt("Minutes elapsed: "));
+                handleTimeSimulation(view.readInt("Input Minutes elapsed"));
                 break;
             default:
                 view.displayError("Invalid choice.");

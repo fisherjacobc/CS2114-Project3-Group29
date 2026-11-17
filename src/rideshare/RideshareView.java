@@ -29,17 +29,25 @@ public class RideshareView {
      * Prints the main menu.
      */
     public void displayMenu() {
-        System.out.println();
-        System.out.println("Rideshare");
-        System.out.println("1. Initialize cars");
-        System.out.println("2. Add passenger");
-        System.out.println("3. Assign passenger to car");
-        System.out.println("4. Drop off passenger");
-        System.out.println("5. View passengers");
-        System.out.println("6. View cars");
-        System.out.println("7. Display roadmap");
-        System.out.println("8. Simulate time");
-        System.out.println("0. Quit");
+        Main.clearScreen();
+
+        System.out.println("┌──Queue Ride──────────────────┐");
+        System.out.println("│                              │");
+        System.out.println("│ [1] Initialize Cars          │");
+        System.out.println("│                              │");
+        System.out.println("│ [2] Add Passenger            │");
+        System.out.println("│ [3] Assign Passenger to Car  │");
+        System.out.println("│ [4] Drop off Passenger       │");
+        System.out.println("│                              │");
+        System.out.println("│ [5] View Passengers          │");
+        System.out.println("│ [6] View Cars                │");
+        System.out.println("│ [7] Display Roadmap          │");
+        System.out.println("│                              │");
+        System.out.println("│ [8] Simulate Time (Inactive) │");
+        System.out.println("│                              │");
+        System.out.println("│ [0] Quit Queue Ride          │");
+        System.out.println("├──────────────────────────────┘");
+        System.out.print("└ Choice: ");
     }
 
 
@@ -51,7 +59,16 @@ public class RideshareView {
      * @return the line entered
      */
     public String readString(String prompt) {
-        System.out.print(prompt);
+        System.out.println();
+
+        int width = Math.max(prompt.length() + 2, 13);
+        System.out.println("┌──Prompt" + "─".repeat(width - 8) + "┐");
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("│ " + prompt + " │");
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("├" + "─".repeat(width) + "┘");
+        System.out.print("└ Response: ");
+
         return scanner.nextLine();
     }
 
@@ -76,6 +93,10 @@ public class RideshareView {
         }
     }
 
+    public int readIntRaw() {
+        return scanner.nextInt();
+    }
+
 
     /**
      * Prints a message.
@@ -84,7 +105,14 @@ public class RideshareView {
      *            the message to print
      */
     public void displayMessage(String message) {
-        System.out.println(message);
+        Main.clearScreen();
+
+        int width = Math.max(message.length() + 2, 13);
+        System.out.println("┌──Message" + "─".repeat(width - 9) + "┐");
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("│ " + message + " │");
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("└" + "─".repeat(width) + "┘");
     }
 
 
@@ -95,7 +123,14 @@ public class RideshareView {
      *            the error to print
      */
     public void displayError(String message) {
-        System.out.println("Error: " + message);
+        Main.clearScreen();
+
+        int width = Math.max(message.length() + 2, 11);
+        System.out.println("┌──Error" + "─".repeat(width - 7) + "┐");
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("│ " + message + " │");
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("└" + "─".repeat(width) + "┘");
     }
 
 
@@ -120,6 +155,8 @@ public class RideshareView {
             System.out.println("Car " + car.getCarId() + ":");
             printPassengerList(car.getPassengers());
         }
+
+        Main.pause(scanner);
     }
 
 
@@ -140,6 +177,8 @@ public class RideshareView {
                 + car.getPassengers().size() + "/" + car.getCapacity()
                 + " seats filled");
         }
+
+        Main.pause(scanner);
     }
 
 
