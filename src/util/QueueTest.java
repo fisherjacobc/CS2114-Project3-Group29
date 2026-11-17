@@ -117,6 +117,33 @@ public class QueueTest {
     }
 
     /**
+     * Tests that FIFO order holds when enqueues and dequeues are mixed
+     * while the queue still has entries
+     */
+    @Test
+    public void testInterleavedEnqueueDequeue() {
+        queue.enqueue("A");
+        queue.enqueue("B");
+        assertEquals("A", queue.dequeue());
+
+        queue.enqueue("C");
+        assertEquals("B", queue.dequeue());
+
+        queue.enqueue("D");
+        queue.enqueue("E");
+        assertEquals("C", queue.dequeue());
+
+        assertEquals(2, queue.size());
+        assertEquals("D", queue.peek());
+        assertEquals(List.of("D", "E"), queue.toList());
+
+        assertEquals("D", queue.dequeue());
+        assertEquals("E", queue.dequeue());
+        assertTrue(queue.isEmpty());
+        assertNull(queue.dequeue());
+    }
+
+    /**
      * Tests that clear empties a non-empty queue.
      */
     @Test
