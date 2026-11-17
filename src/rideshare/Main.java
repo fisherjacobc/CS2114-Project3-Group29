@@ -26,4 +26,9 @@ public class Main {
             new RideshareController(model, view, roadmapView);
         controller.start();
     }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 }
