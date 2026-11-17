@@ -29,6 +29,10 @@ public class RideshareController {
         RideshareModel model,
         RideshareView view,
         RoadmapView roadmapView) {
+        if (model == null || view == null || roadmapView == null) {
+            throw new IllegalArgumentException("Model, view, and roadmap view must not be null. Please restart the program and try again.");
+        }
+
         this.model = model;
         this.view = view;
         this.roadmapView = roadmapView;
