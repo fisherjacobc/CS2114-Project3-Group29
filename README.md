@@ -52,7 +52,6 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 ### Finishing the MVP
 1. Handle the case where no cars have been set up *(Owner: Jacob)*
 2. Write `RideshareModelTest` *(Owner: Aishwarya)*
-3. Fill the remaining `Queue` test gaps *(Owner: Jacob)*
 4. Reject `null` arguments in the controller *(Owner: Jacob)*
 5. Handle end of input without crashing *(Owner: Jacob and Aishwarya)*
 6. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*

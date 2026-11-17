@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * clearing, and converting the queue to a list.
  *
  * @author fisherjc
- * @version 11 Nov 2026
+ * @version 17 Nov 2026
  */
 public class QueueTest {
     private Queue<String> queue;
@@ -163,5 +163,25 @@ public class QueueTest {
         assertEquals(List.of("A", "B"), queue.toList());
         assertEquals("A", queue.peek());
         assertEquals(List.of("A", "B"), queue.toList());
+    }
+
+    /**
+     * Tests that the size of the queue is correct after queuing/dequeuing entries
+     */
+    @Test
+    public void testQueueSize() {
+        assertEquals(0, queue.size());
+
+        queue.enqueue("A");
+        assertEquals(1, queue.size());
+
+        queue.enqueue("B");
+        assertEquals(2, queue.size());
+
+        queue.dequeue();
+        assertEquals(1, queue.size());
+
+        queue.clear();
+        assertEquals(0, queue.size());
     }
 }
