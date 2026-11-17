@@ -17,32 +17,25 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 
 ## Reflection
 
-### What changed from the spec
-- **`Node` and `Queue` are generic** so the same queue works for both the waiting line and the cars, and could be tested before `Passenger` existed
-- **`Queue` accepts `null`**, so null checks moved up into `Car` and `RideshareModel`, which know what a valid entry is
-- **Empty queues and cars return `null`** instead of throwing, since the spec contradicted itself and `null` is simpler for the controller to handle
-- **A full car isn't an exception**: the waiting line has no limit, and seat checks happen when assigning passengers to cars
-- **`Car` has no stored destination**: it reads the destination of its front passenger so it never goes out of date instead of trying to update the same value in two places
-- **`initializeCars` won't replace occupied cars**, so passengers can't be silently deleted
-- **Added `getElapsedMinutes()`** so the controller can display the clock
-- **Menu input is validated in the view and controller together**, and a quit option was added
-
-### Did the model stand alone?
-- Yes, the model classes never print or read input and don't depend on the view or controller
-- All existing tests run without the view or controller
-
-### What happened to the unknowns
-- **Queue behavior after emptying:** figured out and tested
-- **Testing the last drop-off:** tested for `Car`, still needs model-level tests
-- **What triggers drop-offs:** for now the user drops off passengers manually, and clock-driven drop-offs are planned
-- **Assigning passengers to cars:** passengers fill the lowest-numbered car with a free seat
-- **Estimating arrival times:** each stop takes a random time between a set minimum and maximum, and the estimate is shown as that range
-
 ### What doesn't work yet
-- No model tests, and no tests for the controller/view
 - The roadmap view is only a placeholder
-- Simulating time only advances the clock
-- Dropped-off passengers aren't recorded
+   - Arrival-time estimates aren't shown yet.
+
+### How did your design absorb the change?
+- `Car`: each car's stop countdown and drop-offs triggered by time (model)
+- `RideshareModel.updateTravelTime`: advances every car's countdown along with the clock (model)
+- `RideshareController`: Menu choice 8 now reads a number of minutes, and handleTimeSimulation calls the model and works out who was dropped off
+- `RideshareView`: new displayTimeSimulation method, and "(Inactive)" was removed from the menu
+
+### Did the change cross the model/view line?
+We touched only the four places we originally mentioned (`Car`, `updateTravelTime`, the controller's time simulation parts, and one new view method). `Queue`, `Node`, `Passenger` and manual drop-offs weren't affected.
+
+### What changed from your D3 plan?
+- Negative minutes are rejected by the model and shown as an error.
+- Input that isn't a whole number makes the view ask again.
+- Zero minutes is allowed and shows the clock without any drop-offs.
+- We now handle the case where no cars exist, filled the remaining `Queue` test gaps, reject `null` in the controller, and handle end of input (Ctrl+D) without crashing.
+- The console UI view was reworked to be much more appealing
 
 ## Next Steps
 
@@ -58,16 +51,18 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **What shouldn't change:** `Queue`, `Node`, `Passenger`, and manual drop-offs
 - *(Owner: Aishwarya for the model; Jacob for the controller and view)*
 
-### Stretch goals
+### Stretch goals (ALL comitted)
 - **Committed: multiple cars**, which already works but needs tests *(Owner: Aishwarya)*
 - **Committed: time simulation**, as the change feature above
 - **Committed: simple roadmap view** showing each car's upcoming stops *(Owner: Jacob and Aishwarya)*
 - **Committed: arrival-time estimates**, shown as a range: a passenger *n* stops away arrives in a random amount of time, with the actual time picked at random within each stop's range
 
 ### New tests needed
-- **`RideshareModelTest`** for the spec's test plan plus the changes above *(Owner: Aishwarya)*
 - **`CarTest`** for clock-driven drop-offs *(Owner: Aishwarya)*
-- Look into tests for the controller and/or view classes *(Owner: Jacob and Aishwarya)*
+- Look into tests for the controller class *(Owner: Jacob and Aishwarya)*
+
+### 3 Minute Demo
+
 
 ## Attribution + GenAI Note
 ### Attribution
