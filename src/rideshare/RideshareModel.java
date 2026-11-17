@@ -10,7 +10,7 @@ import util.Queue;
  * Manages waiting passengers, cars, and ride assignments.
  *
  * @author Aishwarya Shah
- * @version 10 Nov 2026
+ * @version 17 Nov 2026
  */
 public class RideshareModel {
     private Queue<Passenger> waitingQueue;

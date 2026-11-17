@@ -105,7 +105,9 @@ We touched only the four places we originally mentioned (`Car`, `updateTravelTim
 | ---- | ----------- |
 | rideshare.RideshareModel | Aishwarya added the dropped-off passenger history and a method for retrieving it. |
 | rideshare.RideshareModelTest | Aishwarya added tests for model operations, invalid input, and dropped-off passenger history. |
+| rideshare.RideshareController | Jacob added/updated methods for handling time simulations and dropoffs. |
 | rideshare.RideshareControllerTest | Aishwarya added controller tests and a test view that supplies input and records messages. |
+| rideshare.RideshareView | Jacob revamped the view to look cleaner. |
 | README.md | Jacob updated the main README content. Aishwarya drafted Deliverable 4 attribution. |
 
 ### GenAI

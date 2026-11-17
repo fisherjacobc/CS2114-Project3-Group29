@@ -16,13 +16,6 @@ import util.Passenger;
  * @author Aishwarya Shah
  * @version 17 Nov 2026
  */
-
-/**
- * Tests controller actions using an automatic test view.
- *
- * @author Aishwarya Shah
- * @version 17 Nov 2026
- */
 public class RideshareControllerTest {
 
     private RideshareModel model;
