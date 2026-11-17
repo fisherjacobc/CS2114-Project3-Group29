@@ -87,6 +87,53 @@ Our next feature(s) (the roadmap and arrival-time estimates) both need new scree
 - **`CarTest`** for clock-driven drop-offs *(Owner: Aishwarya)*
 - Look into tests for the controller and/or view classes *(Owner: Jacob and Aishwarya)*
 
+### Three-Minute Demo
+
+**0:00–0:20 — Introduce the project**
+
+Open `src/rideshare/Main.java` and click Run. Press Enter whenever the program pauses after displaying a message.
+
+**0:20–0:40 — Create the cars**
+
+- Enter `1` to initialize cars.
+- Enter `2` for the number of cars.
+- Enter `1` for the capacity of each car.
+
+**0:40–1:10 — Add three passengers**
+
+- Enter `2`, then enter `Maya` and `Library`.
+- Enter `2` again, then enter `Sam` and `Gym`.
+- Enter `2` again, then enter `Alex` and `Dining Hall`.
+- Enter `5` to display the passengers.
+
+**1:10–1:40 — Assign passengers and show a full system**
+
+- Enter `3` to assign Maya to car 1.
+- Enter `3` again to assign Sam to car 2.
+- Enter `3` again to try assigning Alex.
+- Enter `5` to show the passengers.
+
+**1:40–2:05 — Drop off a passenger and reuse the seat**
+
+- Enter `4`, then enter `1` for the car ID.
+- Enter `3` to assign Alex to the available seat.
+- Enter `5` to display the updated passengers.
+
+**2:05–2:30 — Demonstrate invalid input**
+
+- Enter `4`, then enter `99` for a car that does not exist.
+- Enter `2`, enter only spaces for the passenger name, and enter `Library` as the destination.
+
+**2:30–2:50 — Show the tests**
+
+Switch to the VS Code Testing panel and run `RideshareModelTest` and `RideshareControllerTest`.
+
+Show the actual test results.
+
+**2:50–3:00 — Finish**
+
+Return to the program and enter `0` to quit.
+
 ## Attribution + GenAI Note
 ### Attribution
 #### Deliverable 3
