@@ -28,8 +28,9 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **Menu input is validated in the view and controller together**, and a quit option was added
 
 ### Did the model stand alone?
-- Yes, the model classes never print or read input and don't depend on the view or controller
-- All existing tests run without the view or controller
+- The model classes manage state and logic without printing or reading user input.
+- Model tests call the model directly.
+- Controller tests use a test view that supplies input and records output.
 
 ### What happened to the unknowns
 - **Queue behavior after emptying:** figured out and tested
@@ -47,7 +48,7 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 ## Next Steps
 
 ### Finishing the Final Build
-1. Write `RideshareModelTest` *(Owner: Aishwarya)*
+1. Run and review the model and controller tests, then fix any failures. *(Owner: Aishwarya)*
 2. Write the Roadmap View *(Owner: Jacob)*
 3. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
 
@@ -69,6 +70,53 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **`CarTest`** for clock-driven drop-offs *(Owner: Aishwarya)*
 - Look into tests for the controller and/or view classes *(Owner: Jacob and Aishwarya)*
 
+### Three-Minute Demo
+
+**0:00–0:20 — Introduce the project**
+
+Open `src/rideshare/Main.java` and click Run. Press Enter whenever the program pauses after displaying a message.
+
+**0:20–0:40 — Create the cars**
+
+- Enter `1` to initialize cars.
+- Enter `2` for the number of cars.
+- Enter `1` for the capacity of each car.
+
+**0:40–1:10 — Add three passengers**
+
+- Enter `2`, then enter `Maya` and `Library`.
+- Enter `2` again, then enter `Sam` and `Gym`.
+- Enter `2` again, then enter `Alex` and `Dining Hall`.
+- Enter `5` to display the passengers.
+
+**1:10–1:40 — Assign passengers and show a full system**
+
+- Enter `3` to assign Maya to car 1.
+- Enter `3` again to assign Sam to car 2.
+- Enter `3` again to try assigning Alex.
+- Enter `5` to show the passengers.
+
+**1:40–2:05 — Drop off a passenger and reuse the seat**
+
+- Enter `4`, then enter `1` for the car ID.
+- Enter `3` to assign Alex to the available seat.
+- Enter `5` to display the updated passengers.
+
+**2:05–2:30 — Demonstrate invalid input**
+
+- Enter `4`, then enter `99` for a car that does not exist.
+- Enter `2`, enter only spaces for the passenger name, and enter `Library` as the destination.
+
+**2:30–2:50 — Show the tests**
+
+Switch to the VS Code Testing panel and run `RideshareModelTest` and `RideshareControllerTest`.
+
+Show the actual test results.
+
+**2:50–3:00 — Finish**
+
+Return to the program and enter `0` to quit.
+
 ## Attribution + GenAI Note
 ### Attribution
 #### Deliverable 3
@@ -86,9 +134,18 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 | util.PassengerTest | Jacob (Wrote/Tested) |
 | util.Queue | Jacob (Wrote/Reviewed) |
 | util.QueueTest | Jacob (Wrote/Reviewed) |
+
 #### Deliverable 4
+| File | Attribution |
+| ---- | ----------- |
+| rideshare.RideshareModel | Aishwarya added the dropped-off passenger history and a method for retrieving it. |
+| rideshare.RideshareModelTest | Aishwarya added tests for model operations, invalid input, and dropped-off passenger history. |
+| rideshare.RideshareControllerTest | Aishwarya added controller tests and a test view that supplies input and records messages. |
+| README.md | Jacob updated the main README content. Aishwarya drafted Deliverable 4 attribution. |
+
 ### GenAI
 #### Deliverable 3
 GenAI was used in part for the initial programming of the `RideshareModel` class. The output was modified and thoroughly reviewed by Aishwarya.
 #### Deliverable 4
-GenAI was ...
+Aishwarya used GenAI to help write the `RideshareModelTest` and `RideshareControllerTest` classes, including tests for normal behavior and invalid input. Before using the code, Aishwarya thoroughly reviewed it and made changes as needed to make sure it matched the project.
+

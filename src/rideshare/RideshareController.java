@@ -4,7 +4,6 @@ import java.util.NoSuchElementException;
 import util.Passenger;
 
 /**
- * <h3>RideshareController</h3>
  *
  * Controller Portion of the MVC for the Rideshare Program
  *

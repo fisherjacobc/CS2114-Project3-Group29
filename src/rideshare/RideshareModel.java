@@ -1,37 +1,40 @@
 package rideshare;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import util.*;
+import util.Car;
+import util.Passenger;
+import util.Queue;
 
 /**
  * Manages waiting passengers, cars, and ride assignments.
- * 
- * @author Aishwarya Shah aishwaryashah28
+ *
+ * @author Aishwarya Shah
  * @version 10 Nov 2026
  */
 public class RideshareModel {
     private Queue<Passenger> waitingQueue;
     private List<Car> cars;
     private long elapsedMinutes;
+    private List<Passenger> droppedOffPassengers;
 
     /**
-     * Creates a model with no waiting passengers and no cars.
-     */
+    * Creates a model with no passengers or cars.
+    */
     public RideshareModel() {
         waitingQueue = new Queue<>();
         cars = new ArrayList<>();
         elapsedMinutes = 0;
+        droppedOffPassengers = new ArrayList<>();
     }
 
     /**
-     * Sets up cars with IDs starting at 1.
-     * Existing cars can be replaced only when they are empty.
+     * Creates cars when the values are valid and existing cars
+     * are empty.
      *
      * @param numberOfCars how many cars to create
-     * @param capacity the passenger capacity of each car
-     * @return true if initialized, or false for invalid values
-     *         or occupied existing cars
+     * @param capacity the capacity of each car
+     * @return whether initialization succeeded
      */
     public boolean initializeCars(int numberOfCars, int capacity) {
         if (numberOfCars < 1 || capacity < 1) {
@@ -54,12 +57,13 @@ public class RideshareModel {
     }
 
     /**
-     * Creates a passenger and adds them to the waiting queue.
+     * Adds a passenger to the waiting queue.
      *
      * @param name the passenger's name
      * @param destination the passenger's destination
-     * @return true after the passenger is added
-     * @throws IllegalArgumentException if the information is invalid
+     * @return true when the passenger is added
+     * @throws IllegalArgumentException if passenger information
+     *         is invalid
      */
     public boolean addPassenger(String name, String destination) {
         Passenger passenger = new Passenger(name, destination);
@@ -68,10 +72,9 @@ public class RideshareModel {
     }
 
     /**
-     * Moves the first waiting passenger into the first available car.
+     * Moves the first waiting passenger into an available car.
      *
-     * @return true if assigned, or false if nobody is waiting
-     *         or no car has space
+     * @return whether a passenger was assigned
      */
     public boolean loadPassengerInCar() {
         if (waitingQueue.isEmpty()) {
@@ -101,11 +104,17 @@ public class RideshareModel {
             return null;
         }
 
-        return car.dropOffPassenger();
+        Passenger passenger = car.dropOffPassenger();
+
+        if (passenger != null) {
+            droppedOffPassengers.add(passenger);
+        }
+
+        return passenger;
     }
 
     /**
-     * Returns a separate list containing the model's cars.
+     * Returns a separate list containing the cars.
      *
      * @return the car list
      */
@@ -114,9 +123,9 @@ public class RideshareModel {
     }
 
     /**
-     * Returns a separate list of waiting passengers in FIFO order.
+     * Returns waiting passengers in FIFO order.
      *
-     * @return the waiting passengers, or an empty list
+     * @return a separate list of waiting passengers
      */
     public List<Passenger> getWaitingPassengers() {
         if (waitingQueue.isEmpty()) {
@@ -130,7 +139,7 @@ public class RideshareModel {
      * Finds a car by its ID.
      *
      * @param carId the ID to find
-     * @return the matching car, or null if it does not exist
+     * @return the matching car, or null if missing
      */
     public Car getCarById(int carId) {
         for (Car car : cars) {
@@ -143,7 +152,7 @@ public class RideshareModel {
     }
 
     /**
-     * Returns the number of passengers waiting for a car.
+     * Returns the number of waiting passengers.
      *
      * @return the waiting count
      */
@@ -154,8 +163,8 @@ public class RideshareModel {
     /**
      * Advances the simulation clock.
      *
-     * @param minutesElapsed the number of minutes to add
-     * @throws IllegalArgumentException if the number is negative
+     * @param minutesElapsed the minutes to add
+     * @throws IllegalArgumentException if minutes are negative
      */
     public void updateTravelTime(int minutesElapsed) {
         if (minutesElapsed < 0) {
@@ -173,5 +182,14 @@ public class RideshareModel {
      */
     public long getElapsedMinutes() {
         return elapsedMinutes;
+    }
+
+    /**
+    * Returns dropped-off passengers in the order they were dropped off.
+     *
+     * @return a separate list of dropped-off passengers
+     */
+    public List<Passenger> getDroppedOffPassengers() {
+        return new ArrayList<>(droppedOffPassengers);
     }
 }
