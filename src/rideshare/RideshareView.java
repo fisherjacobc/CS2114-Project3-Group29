@@ -2,6 +2,7 @@ package rideshare;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import util.Car;
 import util.Passenger;
@@ -13,7 +14,7 @@ import util.Passenger;
  * input from the console.
  *
  * @author fisherjc
- * @version 10 Nov 2026
+ * @version 17 Nov 2026
  */
 public class RideshareView {
     private Scanner scanner;
@@ -44,7 +45,7 @@ public class RideshareView {
         System.out.println("│ [6] View Cars                │");
         System.out.println("│ [7] Display Roadmap          │");
         System.out.println("│                              │");
-        System.out.println("│ [8] Simulate Time (Inactive) │");
+        System.out.println("│ [8] Simulate Time            │");
         System.out.println("│                              │");
         System.out.println("│ [0] Quit Queue Ride          │");
         System.out.println("├──────────────────────────────┘");
@@ -219,6 +220,62 @@ public class RideshareView {
         }
 
         System.out.println("┌──Cars" + "─".repeat(width - 6) + "┐");
+        System.out.println("│" + " ".repeat(width) + "│");
+        for (String line : lines) {
+            System.out.println("│ " + line + " ".repeat(width - line.length() - 1)
+                + "│");
+        }
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("└" + "─".repeat(width) + "┘");
+        Main.pause(scanner);
+    }
+
+
+    /**
+     * Prints how far the clock advanced, the new total time, and each
+     * passenger dropped off during that time.
+     *
+     * @param minutesAdvanced
+     *            the minutes just simulated
+     * @param totalMinutes
+     *            the total elapsed minutes after advancing
+     * @param dropOffs
+     *            the passengers dropped off, keyed by car ID, in drop-off
+     *            order
+     */
+    public void displayTimeSimulation(
+        int minutesAdvanced,
+        long totalMinutes,
+        Map<Integer, List<Passenger>> dropOffs) {
+        List<String> lines = new ArrayList<>();
+
+        lines.add("Advanced " + minutesAdvanced + " minute(s).");
+        lines.add("Clock: " + totalMinutes + " minute(s) elapsed.");
+        lines.add("");
+
+        if (dropOffs.isEmpty()) {
+            lines.add("No passengers were dropped off.");
+        }
+        else {
+            lines.add("Dropped off");
+            for (Map.Entry<Integer, List<Passenger>> entry : dropOffs
+                .entrySet()) {
+                lines.add("  Car " + entry.getKey());
+                for (Passenger passenger : entry.getValue()) {
+                    lines.add("    " + passenger.getName() + " at "
+                        + passenger.getDestination());
+                }
+            }
+        }
+
+        Main.clearScreen();
+
+        int width = 10;
+        for (String line : lines) {
+            width = Math.max(width, line.length() + 2);
+        }
+
+        System.out.println("┌──Time" + "─".repeat(width - 6) + "┐");
         System.out.println("│" + " ".repeat(width) + "│");
         for (String line : lines) {
             System.out.println("│ " + line + " ".repeat(width - line.length() - 1)
