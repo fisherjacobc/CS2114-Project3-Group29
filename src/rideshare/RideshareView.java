@@ -111,6 +111,11 @@ public class RideshareView {
         System.out.println("Waiting:");
         printPassengerList(waiting);
 
+        if (cars.isEmpty()) {
+            System.out.println("No cars.");
+            return;
+        }
+
         for (Car car : cars) {
             System.out.println("Car " + car.getCarId() + ":");
             printPassengerList(car.getPassengers());

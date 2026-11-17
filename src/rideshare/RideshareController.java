@@ -100,6 +100,10 @@ public class RideshareController {
      * Assigns the next waiting passenger to an available car.
      */
     public void handlePassengerAssignment() {
+        if (!checkCarsExist()) {
+            return;
+        }
+
         if (model.loadPassengerInCar()) {
             view.displayMessage("Passenger assigned to a car.");
         }
@@ -116,6 +120,10 @@ public class RideshareController {
      *            the id of the car
      */
     public void handleDropOffPassenger(int carId) {
+        if (!checkCarsExist()) {
+            return;
+        }
+
         Passenger droppedOff = model.dropOffPassenger(carId);
 
         if (droppedOff != null) {
@@ -193,7 +201,9 @@ public class RideshareController {
                 handlePassengerAssignment();
                 break;
             case 4:
-                handleDropOffPassenger(view.readInt("Car ID: "));
+                if (checkCarsExist()) {
+                    handleDropOffPassenger(view.readInt("Car ID: "));
+                }
                 break;
             case 5:
                 handleViewPassengers();
@@ -211,5 +221,21 @@ public class RideshareController {
                 view.displayError("Invalid choice.");
                 break;
         }
+    }
+
+
+    /**
+     * Checks that cars have been set up, and shows an error if not.
+     *
+     * @return true if at least one car exists
+     */
+    private boolean checkCarsExist() {
+        if (model.getCars().isEmpty()) {
+            view.displayError("No cars have been set up. Use option 1 to "
+                + "initialize cars first.");
+            return false;
+        }
+
+        return true;
     }
 }

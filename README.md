@@ -40,7 +40,6 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 
 ### What doesn't work yet
 - No model tests, and no tests for the controller/view
-- Assigning a passenger before any cars exist gives a misleading message
 - The roadmap view is only a placeholder
 - Simulating time only advances the clock
 - Dropped-off passengers aren't recorded
@@ -50,10 +49,9 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 ## Next Steps
 
 ### Finishing the MVP
-1. Handle the case where no cars have been set up *(Owner: Jacob)*
-2. Write `RideshareModelTest` *(Owner: Aishwarya)*
-3. Handle end of input without crashing *(Owner: Jacob and Aishwarya)*
-4. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
+1. Write `RideshareModelTest` *(Owner: Aishwarya)*
+2. Handle end of input without crashing *(Owner: Jacob and Aishwarya)*
+3. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
 
 ### Change feature: drop-offs driven by the clock
 - **What it is:** each stop takes a random amount of time between a set minimum and maximum (X to Y), and advancing the clock drops off passengers as stops are reached
