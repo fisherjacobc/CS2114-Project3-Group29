@@ -43,14 +43,13 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - The roadmap view is only a placeholder
 - Simulating time only advances the clock
 - Dropped-off passengers aren't recorded
-- The controller doesn't reject `null` arguments
-- Ending input with Ctrl+D crashes the program
 
 ## Next Steps
 
-### Finishing the MVP
+### Finishing the Final Build
 1. Write `RideshareModelTest` *(Owner: Aishwarya)*
-2. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
+2. Write the Roadmap View *(Owner: Jacob)*
+3. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
 
 ### Change feature: drop-offs driven by the clock
 - **What it is:** each stop takes a random amount of time between a set minimum and maximum (X to Y), and advancing the clock drops off passengers as stops are reached
@@ -63,7 +62,7 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **Committed: multiple cars**, which already works but needs tests *(Owner: Aishwarya)*
 - **Committed: time simulation**, as the change feature above
 - **Committed: simple roadmap view** showing each car's upcoming stops *(Owner: Jacob and Aishwarya)*
-- **Stretch: arrival-time estimates**, shown as a range: a passenger *n* stops away arrives in a random amount of time, with the actual time picked at random within each stop's range
+- **Committed: arrival-time estimates**, shown as a range: a passenger *n* stops away arrives in a random amount of time, with the actual time picked at random within each stop's range
 
 ### New tests needed
 - **`RideshareModelTest`** for the spec's test plan plus the changes above *(Owner: Aishwarya)*
@@ -72,6 +71,7 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 
 ## Attribution + GenAI Note
 ### Attribution
+#### Deliverable 3
 | File | Attribution |
 | ---- | ----------- |
 | rideshare.Main | Jacob (Wrote/Reviewed) |
@@ -86,5 +86,9 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 | util.PassengerTest | Jacob (Wrote/Tested) |
 | util.Queue | Jacob (Wrote/Reviewed) |
 | util.QueueTest | Jacob (Wrote/Reviewed) |
+#### Deliverable 4
 ### GenAI
+#### Deliverable 3
 GenAI was used in part for the initial programming of the `RideshareModel` class. The output was modified and thoroughly reviewed by Aishwarya.
+#### Deliverable 4
+GenAI was ...
