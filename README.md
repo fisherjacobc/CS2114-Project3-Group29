@@ -28,9 +28,8 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **Menu input is validated in the view and controller together**, and a quit option was added
 
 ### Did the model stand alone?
-- The model classes manage state and logic without printing or reading user input.
-- Model tests call the model directly.
-- Controller tests use a test view that supplies input and records output.
+- Yes, the model classes never print or read input and don't depend on the view or controller
+- All existing tests run without the view or controller
 
 ### What happened to the unknowns
 - **Queue behavior after emptying:** figured out and tested
@@ -40,10 +39,24 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **Estimating arrival times:** each stop takes a random time between a set minimum and maximum, and the estimate is shown as that range
 
 ### What doesn't work yet
-- No model tests, and no tests for the controller/view
 - The roadmap view is only a placeholder
-- Simulating time only advances the clock
-- Dropped-off passengers aren't recorded
+   - Arrival-time estimates aren't shown yet.
+
+### How did your design absorb the change?
+- `Car`: each car's stop countdown and drop-offs triggered by time (model)
+- `RideshareModel.updateTravelTime`: advances every car's countdown along with the clock (model)
+- `RideshareController`: Menu choice 8 now reads a number of minutes, and handleTimeSimulation calls the model and works out who was dropped off
+- `RideshareView`: new displayTimeSimulation method, and "(Inactive)" was removed from the menu
+
+### Did the change cross the model/view line?
+We touched only the four places we originally mentioned (`Car`, `updateTravelTime`, the controller's time simulation parts, and one new view method). `Queue`, `Node`, `Passenger` and manual drop-offs weren't affected.
+
+### What changed from your D3 plan?
+- Negative minutes are rejected by the model and shown as an error.
+- Input that isn't a whole number makes the view ask again.
+- Zero minutes is allowed and shows the clock without any drop-offs.
+- We now handle the case where no cars exist, filled the remaining `Queue` test gaps, reject `null` in the controller, and handle end of input (Ctrl+D) without crashing.
+- The console UI view was reworked to be much more appealing
 
 ## Next Steps
 
@@ -59,63 +72,15 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 - **What shouldn't change:** `Queue`, `Node`, `Passenger`, and manual drop-offs
 - *(Owner: Aishwarya for the model; Jacob for the controller and view)*
 
-### Stretch goals
+### Stretch goals (ALL comitted)
 - **Committed: multiple cars**, which already works but needs tests *(Owner: Aishwarya)*
 - **Committed: time simulation**, as the change feature above
 - **Committed: simple roadmap view** showing each car's upcoming stops *(Owner: Jacob and Aishwarya)*
 - **Committed: arrival-time estimates**, shown as a range: a passenger *n* stops away arrives in a random amount of time, with the actual time picked at random within each stop's range
 
 ### New tests needed
-- **`RideshareModelTest`** for the spec's test plan plus the changes above *(Owner: Aishwarya)*
 - **`CarTest`** for clock-driven drop-offs *(Owner: Aishwarya)*
 - Look into tests for the controller and/or view classes *(Owner: Jacob and Aishwarya)*
-
-### Three-Minute Demo
-
-**0:00–0:20 — Introduce the project**
-
-Open `src/rideshare/Main.java` and click Run. Press Enter whenever the program pauses after displaying a message.
-
-**0:20–0:40 — Create the cars**
-
-- Enter `1` to initialize cars.
-- Enter `2` for the number of cars.
-- Enter `1` for the capacity of each car.
-
-**0:40–1:10 — Add three passengers**
-
-- Enter `2`, then enter `Maya` and `Library`.
-- Enter `2` again, then enter `Sam` and `Gym`.
-- Enter `2` again, then enter `Alex` and `Dining Hall`.
-- Enter `5` to display the passengers.
-
-**1:10–1:40 — Assign passengers and show a full system**
-
-- Enter `3` to assign Maya to car 1.
-- Enter `3` again to assign Sam to car 2.
-- Enter `3` again to try assigning Alex.
-- Enter `5` to show the passengers.
-
-**1:40–2:05 — Drop off a passenger and reuse the seat**
-
-- Enter `4`, then enter `1` for the car ID.
-- Enter `3` to assign Alex to the available seat.
-- Enter `5` to display the updated passengers.
-
-**2:05–2:30 — Demonstrate invalid input**
-
-- Enter `4`, then enter `99` for a car that does not exist.
-- Enter `2`, enter only spaces for the passenger name, and enter `Library` as the destination.
-
-**2:30–2:50 — Show the tests**
-
-Switch to the VS Code Testing panel and run `RideshareModelTest` and `RideshareControllerTest`.
-
-Show the actual test results.
-
-**2:50–3:00 — Finish**
-
-Return to the program and enter `0` to quit.
 
 ## Attribution + GenAI Note
 ### Attribution

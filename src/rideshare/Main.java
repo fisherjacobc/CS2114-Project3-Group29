@@ -10,7 +10,7 @@ import java.util.Scanner;
  * controller, then starts the program.
  *
  * @author fisherjc
- * @version 10 Nov 2026
+ * @version 17 Nov 2026
  */
 public class Main {
 

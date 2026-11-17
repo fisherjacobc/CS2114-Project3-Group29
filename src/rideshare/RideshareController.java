@@ -1,6 +1,11 @@
 package rideshare;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import util.Car;
 import util.Passenger;
 
 /**
@@ -8,7 +13,7 @@ import util.Passenger;
  * Controller Portion of the MVC for the Rideshare Program
  *
  * @author fisherjc
- * @version 10 Nov 2026
+ * @version 17 Nov 2026
  */
 public class RideshareController {
     private RideshareModel model;
@@ -168,22 +173,70 @@ public class RideshareController {
 
 
     /**
-     * Simulates the passage of time.
+     * Simulates the passage of time, then shows the new clock and any
+     * passengers dropped off along the way.
      *
      * @param minutesElapsed
      *            the number of minutes that have passed
      */
     public void handleTimeSimulation(int minutesElapsed) {
-        // TODO: Finish time simulation for Deliverable 5
-        view.displayMessage("Time Simulation not completed yet.");
-        // try {
-        //     model.updateTravelTime(minutesElapsed);
-        //     view.displayMessage("Total elapsed time: "
-        //         + model.getElapsedMinutes() + " minute(s).");
-        // }
-        // catch (IllegalArgumentException e) {
-        //     view.displayError(e.getMessage());
-        // }
+        Map<Integer, List<Passenger>> before = snapshotCarPassengers();
+
+        try {
+            model.updateTravelTime(minutesElapsed);
+        }
+        catch (IllegalArgumentException e) {
+            view.displayError(e.getMessage());
+            return;
+        }
+
+        view.displayTimeSimulation(minutesElapsed, model.getElapsedMinutes(),
+            findDropOffs(before));
+    }
+
+
+    /**
+     * Records the passengers currently in each car.
+     *
+     * @return each car's passengers in drop-off order, keyed by car ID
+     */
+    private Map<Integer, List<Passenger>> snapshotCarPassengers() {
+        Map<Integer, List<Passenger>> snapshot = new LinkedHashMap<>();
+        for (Car car : model.getCars()) {
+            snapshot.put(car.getCarId(), car.getPassengers());
+        }
+        return snapshot;
+    }
+
+
+    /**
+     * Works out who was dropped off since the given snapshot. Cars drop
+     * passengers off from the front, so any passengers a car has lost
+     * are the first ones in its earlier list.
+     *
+     * @param before
+     *            each car's passengers before time was simulated
+     * @return the dropped-off passengers keyed by car ID, leaving out
+     *         cars with no drop-offs
+     */
+    private Map<Integer, List<Passenger>> findDropOffs(
+        Map<Integer, List<Passenger>> before) {
+        Map<Integer, List<Passenger>> dropOffs = new LinkedHashMap<>();
+
+        for (Car car : model.getCars()) {
+            List<Passenger> earlier = before.get(car.getCarId());
+            if (earlier == null) {
+                continue;
+            }
+
+            int dropped = earlier.size() - car.getPassengers().size();
+            if (dropped > 0) {
+                dropOffs.put(car.getCarId(),
+                    new ArrayList<>(earlier.subList(0, dropped)));
+            }
+        }
+
+        return dropOffs;
     }
 
 
@@ -223,7 +276,8 @@ public class RideshareController {
                 handleRoadmapDisplay();
                 break;
             case 8:
-                handleTimeSimulation(/*view.readInt("Input Minutes elapsed")*/ 0);
+                handleTimeSimulation(
+                    view.readInt("Input Minutes to advance"));
                 break;
             default:
                 view.displayError("Invalid choice.");
