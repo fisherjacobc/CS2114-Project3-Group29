@@ -1,5 +1,6 @@
 package rideshare;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import util.Car;
@@ -121,6 +122,8 @@ public class RideshareView {
         System.out.println("│ " + message + " │");
         System.out.println("│" + " ".repeat(width) + "│");
         System.out.println("└" + "─".repeat(width) + "┘");
+
+        Main.pause(scanner);
     }
 
 
@@ -153,19 +156,38 @@ public class RideshareView {
      *            the cars
      */
     public void displayPassengers(List<Passenger> waiting, List<Car> cars) {
-        System.out.println("Waiting:");
-        printPassengerList(waiting);
+        List<String> lines = new ArrayList<>();
+
+        lines.add("Waiting");
+        addPassengerLines(lines, waiting);
 
         if (cars.isEmpty()) {
-            System.out.println("No cars.");
-            return;
+            lines.add("");
+            lines.add("No cars.");
         }
 
         for (Car car : cars) {
-            System.out.println("Car " + car.getCarId() + ":");
-            printPassengerList(car.getPassengers());
+            lines.add("");
+            lines.add("Car " + car.getCarId() + " (" + car.getPassengers().size()
+                + "/" + car.getCapacity() + ")");
+            addPassengerLines(lines, car.getPassengers());
         }
 
+        Main.clearScreen();
+
+        int width = 16;
+        for (String line : lines) {
+            width = Math.max(width, line.length() + 2);
+        }
+
+        System.out.println("┌──Passengers" + "─".repeat(width - 12) + "┐");
+        System.out.println("│" + " ".repeat(width) + "│");
+        for (String line : lines) {
+            System.out.println("│ " + line + " ".repeat(width - line.length() - 1)
+                + "│");
+        }
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("└" + "─".repeat(width) + "┘");
         Main.pause(scanner);
     }
 
@@ -177,35 +199,55 @@ public class RideshareView {
      *            the cars
      */
     public void displayCars(List<Car> cars) {
+        List<String> lines = new ArrayList<>();
+
         if (cars.isEmpty()) {
-            System.out.println("No cars.");
-            return;
+            lines.add("No cars.");
         }
 
         for (Car car : cars) {
-            System.out.println("Car " + car.getCarId() + " - "
+            lines.add("Car " + car.getCarId() + " - "
                 + car.getPassengers().size() + "/" + car.getCapacity()
                 + " seats filled");
         }
 
+        Main.clearScreen();
+
+        int width = 10;
+        for (String line : lines) {
+            width = Math.max(width, line.length() + 2);
+        }
+
+        System.out.println("┌──Cars" + "─".repeat(width - 6) + "┐");
+        System.out.println("│" + " ".repeat(width) + "│");
+        for (String line : lines) {
+            System.out.println("│ " + line + " ".repeat(width - line.length() - 1)
+                + "│");
+        }
+        System.out.println("│" + " ".repeat(width) + "│");
+        System.out.println("└" + "─".repeat(width) + "┘");
         Main.pause(scanner);
     }
 
 
     /**
-     * Prints a list of passengers, one per line.
+     * Adds one indented line per passenger to the given lines.
      *
+     * @param lines
+     *            the lines to add to
      * @param passengers
-     *            the passengers to print
+     *            the passengers to add
      */
-    private void printPassengerList(List<Passenger> passengers) {
+    private void addPassengerLines(
+        List<String> lines,
+        List<Passenger> passengers) {
         if (passengers.isEmpty()) {
-            System.out.println("  (none)");
+            lines.add("  (none)");
             return;
         }
 
         for (Passenger passenger : passengers) {
-            System.out.println("  " + passenger.getName() + " -> "
+            lines.add("  " + passenger.getName() + " -> "
                 + passenger.getDestination());
         }
     }

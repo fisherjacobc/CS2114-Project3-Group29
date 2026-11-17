@@ -156,7 +156,7 @@ public class RideshareController {
      * Displays the roadmap.
      */
     public void handleRoadmapDisplay() {
-        // TODO (roadmap view): display model.getCars() on the roadmap
+        // TODO: (roadmap view): display model.getCars() on the roadmap for Deliverable 5
         view.displayMessage("Roadmap not implemented yet.");
     }
 
@@ -168,14 +168,16 @@ public class RideshareController {
      *            the number of minutes that have passed
      */
     public void handleTimeSimulation(int minutesElapsed) {
-        try {
-            model.updateTravelTime(minutesElapsed);
-            view.displayMessage("Total elapsed time: "
-                + model.getElapsedMinutes() + " minute(s).");
-        }
-        catch (IllegalArgumentException e) {
-            view.displayError(e.getMessage());
-        }
+        // TODO: Finish time simulation for Deliverable 5
+        view.displayMessage("Time Simulation not completed yet.");
+        // try {
+        //     model.updateTravelTime(minutesElapsed);
+        //     view.displayMessage("Total elapsed time: "
+        //         + model.getElapsedMinutes() + " minute(s).");
+        // }
+        // catch (IllegalArgumentException e) {
+        //     view.displayError(e.getMessage());
+        // }
     }
 
 
@@ -215,7 +217,7 @@ public class RideshareController {
                 handleRoadmapDisplay();
                 break;
             case 8:
-                handleTimeSimulation(view.readInt("Input Minutes elapsed"));
+                handleTimeSimulation(/*view.readInt("Input Minutes elapsed")*/ 0);
                 break;
             default:
                 view.displayError("Invalid choice.");
