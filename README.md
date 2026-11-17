@@ -58,6 +58,11 @@ We touched only the four places we originally mentioned (`Car`, `updateTravelTim
 - We now handle the case where no cars exist, filled the remaining `Queue` test gaps, reject `null` in the controller, and handle end of input (Ctrl+D) without crashing.
 - The console UI view was reworked to be much more appealing
 
+### What would make the next feature cheaper?
+Our next feature(s) (the roadmap and arrival-time estimates) both need new screens and more information from the model. 
+- Right now `updateTravelTime` only changes the clock, so the controller takes a snapshot of every car before and after and compares them to work out who was dropped off. If `updateTravelTime` returned the drop-offs itself, the controller wouldn't need that comparison code, and arrival-time estimates could use the same result instead of adding a second snapshot.
+- A lot of different areas/methods, such as `displayPassengers`, `displayCars` and `displayTimeSimulation` each use the same style box with width and other calculations. A single `displayBox(title, lines)` method would turn each new screen, like the roadmap, into a few lines of building the text.
+
 ## Next Steps
 
 ### Finishing the Final Build
