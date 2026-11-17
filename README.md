@@ -50,8 +50,7 @@ To run tests, head to the Testing tab (looks like a beaker icon), and you can ru
 
 ### Finishing the MVP
 1. Write `RideshareModelTest` *(Owner: Aishwarya)*
-2. Handle end of input without crashing *(Owner: Jacob and Aishwarya)*
-3. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
+2. Walk through the full program together, including bad inputs *(Owner: Jacob and Aishwarya)*
 
 ### Change feature: drop-offs driven by the clock
 - **What it is:** each stop takes a random amount of time between a set minimum and maximum (X to Y), and advancing the clock drops off passengers as stops are reached

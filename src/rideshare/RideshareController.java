@@ -1,5 +1,6 @@
 package rideshare;
 
+import java.util.NoSuchElementException;
 import util.Passenger;
 
 /**
@@ -43,16 +44,22 @@ public class RideshareController {
      * Starts the program and runs the menu until the user quits.
      */
     public void start() {
-        while (true) {
-            view.displayMenu();
-            int choice = view.readIntRaw("Input Choice");
+        try {
+            while (true) {
+                view.displayMenu();
+                int choice = view.readIntRaw("Input Choice");
 
-            if (choice == 0) {
-                view.displayMessage("Program ended.");
-                return;
+                if (choice == 0) {
+                    view.displayMessage("Program ended.");
+                    return;
+                }
+
+                handleMenuChoice(choice);
             }
-
-            handleMenuChoice(choice);
+        }
+        catch (NoSuchElementException e) {
+            // Input ended (e.g. Ctrl+D), so quit instead of crashing
+            view.displayMessage("No more input. Program ended.");
         }
     }
 
